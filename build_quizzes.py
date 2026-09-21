@@ -263,10 +263,12 @@ def add_question(doc, question):
         prevent_row_split(row)
         label = row.cells[0].paragraphs[0]
         label.paragraph_format.space_after = Pt(0)
+        label.paragraph_format.keep_with_next = idx < len(question["options"]) - 1
         label.alignment = WD_ALIGN_PARAGRAPH.RIGHT
         set_run_font(label.add_run(f"{chr(65 + idx)}."), size=10.5, bold=True)
         text = row.cells[1].paragraphs[0]
         text.paragraph_format.space_after = Pt(0)
+        text.paragraph_format.keep_with_next = idx < len(question["options"]) - 1
         set_run_font(text.add_run(option["text"]), size=10.5)
 
     after = doc.add_paragraph()
